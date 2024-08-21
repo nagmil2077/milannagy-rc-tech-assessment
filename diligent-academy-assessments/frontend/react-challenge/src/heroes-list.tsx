@@ -10,19 +10,24 @@ type Hero = {
 
 function fetchHeroes() {
   return callApi<Hero[]>('heroes')
-    .then(heroesList => heroesList)
-    .catch(error => {
-      console.error("Error fetching heroes:", error);
-      return [];
-    });
+    .then(heroesList => heroesList);
 };
 
 function HeroesList() {
   const [heroes, setHeroes] = useState<Hero[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchHeroes().then(heroesList => {
+    fetchHeroes()
+      .catch(error => {
+        console.error("Error fetching heroes:", error);
+        setError('Failed to fetch heroes');
+        return [];
+      })
+      .then(heroesList => {
       setHeroes(heroesList);
+      setLoading(false);
     });
   }, []);
 
@@ -32,6 +37,14 @@ function HeroesList() {
         hero.id === id ? { ...hero, available: !hero.available } : hero
       )
     );
+  }
+
+  if (loading) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>{error}</p>
   }
 
   return (
