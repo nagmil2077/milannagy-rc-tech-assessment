@@ -1,0 +1,23 @@
+.hero-item {
+    display: inline-block;
+    width: calc(33.333% - 10px);
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.hero-number {
+    font-weight: bold;
+}
+
+.hero-name {
+    margin-left: 10px;
+}
+
+.available .hero-name {
+    color: green;
+}
+
+.unavailable .hero-name {
+    color: red;
+}

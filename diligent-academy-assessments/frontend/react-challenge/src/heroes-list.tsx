@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { callApi } from "./call-api";
 import HeroItem from "./hero-item";
+import './HeroesList.css';
 
 type Hero = {
   id: number;
@@ -50,11 +51,11 @@ function HeroesList() {
   return (
     <>
       <h2>Heroes</h2>
-      <ul>
+      <div className="heroes-list">
         {heroes.map(hero => (
           <HeroItem key={hero.id} {...hero} onToggleAvailability={toggleAvailability} />
         ))}
-      </ul>
+      </div>
     </>
   );
 }
