@@ -26,12 +26,20 @@ function HeroesList() {
     });
   }, []);
 
+  const toggleAvailability = (id: number) => {
+    setHeroes(prevHeroes =>
+      prevHeroes.map(hero =>
+        hero.id === id ? { ...hero, available: !hero.available } : hero
+      )
+    );
+  }
+
   return (
     <>
       <h2>Heroes</h2>
       <ul>
         {heroes.map(hero => (
-          <HeroItem key={hero.id} {...hero} />
+          <HeroItem key={hero.id} {...hero} onToggleAvailability={toggleAvailability} />
         ))}
       </ul>
     </>
